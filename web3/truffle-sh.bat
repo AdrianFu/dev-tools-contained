@@ -1,1 +1,1 @@
-docker run --rm -it  -v %cd%:/usr/src/project tianshufu/truffle bash
+docker run --rm -it  -v %cd%:/home/app tianshufu/truffle bash
