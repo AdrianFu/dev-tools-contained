@@ -1,0 +1,1 @@
+docker build --target truffle -t tianshufu/truffle:latest . 
