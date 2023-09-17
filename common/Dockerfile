@@ -1,7 +1,7 @@
 From ubuntu:jammy as ubuntu-fat
 
 RUN apt-get update && \
-    apt-get -y install sudo curl ufw net-tools && \
+    apt-get -y install sudo curl ufw net-tools iputils-ping && \
     rm -fr /var/lib/apt/lists/* && \
     rm -rf /etc/apt/sources.list.d/*
 

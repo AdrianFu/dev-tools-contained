@@ -1,1 +1,1 @@
-docker run -p 9000:9000 --cap-add=NET_ADMIN --rm -it --name ubuntu-fat-shell tianshufu/ubuntu-fat bash --
+docker run -p 9000:9000 --network dev-net --cap-add=NET_ADMIN --rm -it --name ubuntu-fat-shell tianshufu/ubuntu-fat bash --
