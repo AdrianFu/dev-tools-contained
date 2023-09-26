@@ -1,0 +1,1 @@
+docker run --network dev-net --rm -it --name python3 -v %cd%:/home python:3 bash --
