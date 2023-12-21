@@ -52,4 +52,11 @@ RUN /bin/bash -c 'pip install virtualenv && \
     pip install requests'
 WORKDIR /home
 
+FROM python:3 as yfinance
+
+#RUN /bin/bash -c 'pip install pandas && pip install requests && pip install peewee && pip install appdirs && pip install bs4 && pip install frozendict && pip install multitasking'
+RUN /bin/bash -c 'pip install pandas requests peewee appdirs bs4 frozendict multitasking yfinance requests_cache requests_ratelimiter pyrate_limiter'
+
+WORKDIR /home
+
 #ENTRYPOINT /bin/bash -c 'pwd'
