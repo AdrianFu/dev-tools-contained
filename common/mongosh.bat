@@ -1,0 +1,1 @@
+docker run --network dev-net --rm -it --name mongosh -v %cd%:/home rtsp/mongosh bash

@@ -1,1 +1,0 @@
-docker run --detach --publish 8545:8545 --network dev-net --name ganache trufflesuite/ganache:latest

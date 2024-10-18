@@ -1,0 +1,1 @@
+docker run --network dev-net --rm -it --name mongodb-atlas -v %cd%:/home mongodb/atlas bash
