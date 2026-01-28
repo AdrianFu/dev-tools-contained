@@ -1,1 +1,1 @@
-docker run -p 8080:8080 --network dev-net --cap-add=NET_ADMIN --rm -it --name node18-fat-shell -v %cd%:/home/app tianshufu/node18-fat bash --
+docker run -p 8080:8080 --network dev-net --cap-add=NET_ADMIN --rm -it --name node18-fat-shell -v %cd%:/home/app -v %USERPROFILE%\.secrets\ZscalerRootCA.cer:/usr/local/share/ca-certificates/ZscalerRootCA.crt:ro -e NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/ZscalerRootCA.crt tianshufu/node18-fat bash -c "update-ca-certificates && exec bash"

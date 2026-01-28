@@ -1,12 +1,20 @@
-From ubuntu:jammy as ubuntu-fat
+# syntax=docker/dockerfile:1
+FROM ubuntu:noble AS ubuntu-fat
 
 RUN apt-get update && \
-    apt-get -y install sudo curl ufw net-tools iputils-ping && \
-    rm -fr /var/lib/apt/lists/* && \
-    rm -rf /etc/apt/sources.list.d/*
+    apt-get -y install sudo curl ufw net-tools nano iputils-ping gnupg ca-certificates libatomic1
 
 
-From ubuntu-fat as node18-fat
+FROM ubuntu-fat AS node-fat
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && \
+RUN --mount=type=secret,id=zscaler_cert,target=/usr/local/share/ca-certificates/ZscalerRootCA.crt \
+    update-ca-certificates
+
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash - && \
     sudo apt-get install -y nodejs
+
+
+FROM node-fat AS opencode-fat
+
+RUN --mount=type=secret,id=zscaler_cert,target=/usr/local/share/ca-certificates/ZscalerRootCA.crt \
+    NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/ZscalerRootCA.crt npm i -g opencode-ai@latest

@@ -1,0 +1,33 @@
+services:
+  ubuntu-fat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ubuntu-fat
+    image: tianshufu/ubuntu-fat:latest
+
+  node-fat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node-fat
+      secrets:
+        - zscaler_cert
+    image: tianshufu/node-fat:latest
+    depends_on:
+      - ubuntu-fat
+
+  opencode-fat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: opencode-fat
+      secrets:
+        - zscaler_cert
+    image: tianshufu/opencode-fat:latest
+    depends_on:
+      - node-fat
+
+secrets:
+  zscaler_cert:
+    file: ${USERPROFILE}/.secrets/ZscalerRootCA.cer
