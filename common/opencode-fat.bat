@@ -1,1 +1,1 @@
-docker run -p 8080:8080 --network dev-net --cap-add=NET_ADMIN --rm -it --name opencode-fat-shell -v %cd%:/home/vscode/app -v %USERPROFILE%\.secrets\auth.json:/home/vscode/.local/share/opencode/auth.json:ro tianshufu/opencode-fat bash 
+docker run -p 8080:8080 --network dev-net --cap-add=NET_ADMIN --rm -it --name opencode-fat-shell -v %cd%:/home/vscode/app -v %USERPROFILE%\.secrets\auth.json:/home/vscode/.local/share/opencode/auth.json:ro --user root tianshufu/opencode-fat bash -c "sudo chown -R vscode:vscode /home/vscode/app && runuser -u vscode -- bash"

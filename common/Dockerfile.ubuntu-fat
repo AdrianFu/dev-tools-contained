@@ -47,3 +47,4 @@ RUN apt-get update && \
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x -o node_setup.sh    
 
 RUN useradd -m -s /bin/bash vscode
+RUN mkdir -p /home/vscode/app && chown -R vscode:vscode /home/vscode
