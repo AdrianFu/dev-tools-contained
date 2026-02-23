@@ -1,0 +1,13 @@
+ARG BASE_IMAGE=tianshufu/ubuntu-fat:latest
+FROM ${BASE_IMAGE} AS opencode-fat
+
+USER vscode
+WORKDIR /home/vscode
+
+RUN curl -fsSL https://opencode.ai/install -o opencode_install.sh && \
+    ls -l opencode_install.sh && \
+    bash opencode_install.sh
+
+ENV PATH="/home/vscode/.opencode/bin:${PATH}"
+    
+RUN opencode --version

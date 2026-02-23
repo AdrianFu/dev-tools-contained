@@ -30,5 +30,5 @@ You must add the corporate proxy's root CA certificate to your trusted certifica
    - Go to **Trusted Root Certification Authorities > Certificates**
    - Look for "Zscaler Root CA". Right-click > All Tasks > Export (choose Base-64 encoded .cer or .pem)
    - Save it to a known location (e.g., `C:\Users\YourUser\.secrets\ZscalerRootCA.cer`).
-2. Add the certificate to docker image build as shown in `common/Dockerfile` and `common/docker-compose.yml`.
-3. When running containers, mount the certificate and set `NODE_EXTRA_CA_CERTS` environment variable as shown in `common/node18-fat-sh.bat`.
+2. Add the certificate to docker image build as shown in `common/Dockerfile.ubuntu-fat`.
+3. set `NODE_EXTRA_CA_CERTS` environment variable as shown in `common/Dockerfile.node-fat`.

@@ -1,0 +1,17 @@
+ARG BASE_IMAGE=tianshufu/opencode-fat:latest
+FROM ${BASE_IMAGE} AS node-fat
+
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/zscaler.crt
+
+USER root
+WORKDIR /
+
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x -o node_setup.sh && \
+bash node_setup.sh && \
+apt-get install -y nodejs && \
+rm node_setup.sh
+
+USER vscode
+WORKDIR /home/vscode
+
+RUN node -v && npm -v

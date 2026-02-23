@@ -1,0 +1,23 @@
+ARG BASE_IMAGE=tianshufu/opencode-fat:latest
+
+FROM ${BASE_IMAGE} AS flutter-fat
+
+ARG FLUTTER_VER=3.41.2-stable
+ARG FLUTTER_FILE=flutter_linux_${FLUTTER_VER}.tar.xz
+
+ENV FLUTTER_HOME=/opt/flutter
+ENV PATH="${PATH}:${FLUTTER_HOME}/bin"
+
+USER root
+
+RUN --mount=type=bind,source=.cache/${FLUTTER_FILE},target=/tmp/flutter_linux.tar.xz \
+    mkdir -p ${FLUTTER_HOME} && \
+    tar -xf /tmp/flutter_linux.tar.xz -C /opt/ && \
+    chown -R vscode:vscode ${FLUTTER_HOME}
+
+USER vscode
+WORKDIR /home/vscode
+
+RUN git config --global --add safe.directory ${FLUTTER_HOME} \
+    && flutter config --no-analytics \
+    && flutter doctor

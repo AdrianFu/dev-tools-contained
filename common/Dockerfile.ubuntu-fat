@@ -1,0 +1,49 @@
+ARG BASE_IMAGE=ubuntu:noble
+FROM ${BASE_IMAGE} AS ubuntu-fat
+
+# 1. Handle Zscaler conditionally 
+RUN --mount=type=secret,id=zscaler_cert,dst=/tmp/zscaler_cert \
+    if [ -f /tmp/zscaler_cert ]; then \
+        mkdir -p /usr/local/share/ca-certificates && \
+        cp /tmp/zscaler_cert /usr/local/share/ca-certificates/zscaler.crt; \
+        echo "Zscaler certificate copied."; \
+    else \
+        echo "Zscaler certificate not found."; \
+    fi
+RUN ls -l /usr/local/share/ca-certificates | grep zscaler
+
+# 2. Install base packages 
+# We use '|| true' on the first update so it doesn't crash if the cert is missing/needed
+RUN apt-get update || true && \
+    apt-get -y install ca-certificates && \
+    if [ -f /usr/local/share/ca-certificates/zscaler.crt ]; then \
+        update-ca-certificates; \
+        echo "Zscaler certificate added and CA certificates updated."; \
+    fi
+
+RUN ls -l /etc/ssl/certs | grep zscaler
+
+# 3. Normal apt-get installation
+RUN apt-get update && \
+    apt-get -y install \
+    apt-transport-https \
+    build-essential \
+    ca-certificates \
+    curl \
+    git \
+    gnupg \
+    iputils-ping \
+    libatomic1 \
+    lsb-release \
+    nano \
+    net-tools \
+    software-properties-common \
+    sudo \
+    ufw \
+    unzip \
+    wget \
+    xz-utils
+
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x -o node_setup.sh    
+
+RUN useradd -m -s /bin/bash vscode

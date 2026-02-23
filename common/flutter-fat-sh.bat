@@ -1,0 +1,1 @@
+docker run -p 8080:8080 --network dev-net --cap-add=NET_ADMIN --rm -it --name flutter-fat-shell -v %cd%:/home/vscode/app -v %USERPROFILE%\.secrets\auth.json:/home/vscode/.local/share/opencode/auth.json:ro tianshufu/flutter-fat bash
