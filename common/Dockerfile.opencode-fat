@@ -8,8 +8,9 @@ RUN curl -fsSL https://opencode.ai/install -o opencode_install.sh && \
     ls -l opencode_install.sh && \
     bash opencode_install.sh
 
-RUN --mount=type=bind,source=flutter-resources,target=/tmp/flutter-resources \
-    cp -r /tmp/flutter-resources/.local .
+RUN --mount=type=bind,source=opencode-resources,target=/tmp/opencode-resources \
+    cp -r /tmp/opencode-resources/.local . && \
+    cp -r /tmp/opencode-resources/.config .
 
 ENV PATH="/home/vscode/.opencode/bin:${PATH}"
     
