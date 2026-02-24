@@ -3,7 +3,7 @@ import type { PluginInput, Hooks, EventFileEdited } from "@opencode-ai/plugin";
 const DEBOUNCE_MS = 60000; // 60 seconds
 const MAX_ITERATIONS = 10;
 const FLUTTER_PROJECT_ROOT = "/home/vscode/app/src/my_wardrobe";
-const CHANGE_SUMMARY_PATH = "/home/vscode/app/change-summary.md";
+const CHANGE_SUMMARY_PATH = "/home/vscode/app/CHANGELOG.md";
 
 interface AnalysisIssue {
   severity: "info" | "warning" | "error";
