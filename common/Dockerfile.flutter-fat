@@ -18,6 +18,9 @@ RUN --mount=type=bind,source=.cache/${FLUTTER_FILE},target=/tmp/flutter_linux.ta
 USER vscode
 WORKDIR /home/vscode
 
+RUN --mount=type=bind,source=flutter-resources,target=/tmp/flutter-resources \
+    cp -r /tmp/flutter-resources/.opencode .
+    
 RUN git config --global --add safe.directory ${FLUTTER_HOME} \
     && flutter config --no-analytics \
     && flutter doctor
