@@ -1,2 +1,2 @@
 # Ignore everything under .cache
-common/.cache/*
+**/.cache/**
