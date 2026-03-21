@@ -44,7 +44,7 @@ RUN apt-get update && \
     wget \
     xz-utils
 
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x -o node_setup.sh    
+RUN useradd -m -s /bin/bash vscode && \
+    mkdir -p /home/vscode/app && chown -R vscode:vscode /home/vscode
+RUN [ -f /usr/local/share/ca-certificates/zscaler.crt ] && sudo chmod 644 /usr/local/share/ca-certificates/zscaler.crt
 
-RUN useradd -m -s /bin/bash vscode
-RUN mkdir -p /home/vscode/app && chown -R vscode:vscode /home/vscode

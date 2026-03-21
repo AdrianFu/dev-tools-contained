@@ -1,0 +1,1 @@
+docker run -p 8080:8080 --network dev-net --cap-add=NET_ADMIN --rm -it --name gemini-fat-shell -v %cd%:/home/vscode/app --env-file %USERPROFILE%\.secrets\gemini.env --user root tianshufu/gemini-fat bash -c "sudo chown -R vscode:vscode /home/vscode/app && runuser -u vscode -- bash"

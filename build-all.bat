@@ -48,3 +48,15 @@ if errorlevel 1 (
     exit /b 1
 )
 popd
+
+pushd gemini-cli
+REM Build gemini-fat target
+for /f "tokens=4 delims=:," %%a in ('curl -s https://registry.npmjs.org/@google%%2Fgemini-cli/latest ^| findstr "version"') do set GEMINI_VERSION=%%~a
+
+echo Latest gemini-cli version: %GEMINI_VERSION%
+call docker build --progress=plain --build-arg GEMINI_VERSION=%GEMINI_VERSION% -t tianshufu/gemini-fat:latest -t tianshufu/gemini-fat:%DATETIME% .
+if errorlevel 1 (
+    echo Error: Failed to build gemini-fat target
+    exit /b 1
+)
+popd
